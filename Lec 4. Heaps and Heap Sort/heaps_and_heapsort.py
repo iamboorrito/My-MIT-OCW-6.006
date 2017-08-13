@@ -1,7 +1,7 @@
 """
 Created on Aug 12, 2017
 
-@author: Evan
+@author: Evan Burton
 
 ################################################
 #            Heaps and Priority Queue          #

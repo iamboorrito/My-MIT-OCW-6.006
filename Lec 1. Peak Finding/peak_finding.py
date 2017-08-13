@@ -1,10 +1,11 @@
 '''
 Created on Aug 12, 2017
 
-@author: Evan
+@author: Evan Burton
 '''
-
-# We want to find a local peak if it exists.
+################################################
+# We want to find a local peak if it exists.   #
+################################################
 
 ################################################
 #           Straightforward Approach           #

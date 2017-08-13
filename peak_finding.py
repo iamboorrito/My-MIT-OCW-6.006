@@ -127,20 +127,21 @@ def find_peak_2D(a):
     
     # find global max in column j, Theta(n)
     for i in range(len(a)):
-        if a[i][j] > max_index:
+        if a[i][j] > a[max_index][j]:
             max_index = i
     
     # find 1D peak in row i, Theta(log(m))
-    return (max_index, find_peak(a[i], 0, len(a[i])))
+    return (max_index, find_peak(a[max_index], 0, len(a[i])))
 
 
 a = [[14, 13, 12],
      [15, 99, 11],
-     [1, 11, 32]]
+     [1, 14, 32],
+     [1, 11, 12]]
 
-print(a[0])
-print(a[1])
+for i in range(len(a)):
+    print(a[i])
 
-print(find_peak_2D(a))
+print("peak at " + str(find_peak_2D(a)))
 
     

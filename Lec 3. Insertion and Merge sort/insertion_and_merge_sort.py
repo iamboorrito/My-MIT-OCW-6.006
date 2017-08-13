@@ -81,9 +81,80 @@ def insertion_sort(A):
             A[j-1] = temp
             
             j-=1
-    
-A = [5, 2, 4, 6, 1, 3]
 
-print(A)
-insertion_sort(A)
-print(A)
+"""
+
+################################################
+#                 Merge Sort                   #
+################################################
+
+         [       A       ]
+         [       ][      ]
+         [  ][  ] [  ][  ]
+         [ ] [ ]  [ ] [ ]
+         []  []   []  []
+         
+         Merge singletons and empty lists
+         
+         [    sorted A    ]
+         
+         20 12
+         13 11
+          7  9
+          2  1    take 1, keep finger on 2
+                  take 2, keep finger on 9
+                  take 7, keep finger on 9
+                  take 9, keep finger on 13
+                  take 11, ... 13
+                  
+                  1 2 7 9 11 13
+        
+"""
+
+def merge_sort(A):
+
+    if len(A) <= 1:
+        return A
+    elif len(A) == 2:
+        if A[0] > A[1]:
+            temp = A[0]
+            A[0] = A[1]
+            A[1] = temp
+        return A
+    else:
+        
+        mid = int((len(A))/2)
+        left = merge_sort(A[0:mid])
+        right = merge_sort(A[mid:len(A)])
+        
+        return merge(left, right)
+
+def merge(A, B):
+    
+    left = right = 0
+    length_A = len(A)
+    length_B = len(B)
+    result = [0]*(length_A+length_B)
+    i = 0
+
+    # Two finger method
+    while i < length_A+length_B:
+        if A[left] <= B[right]:
+            result[i] = A[left]
+            left+=1
+            i+=1
+            
+        else:
+            result[i] = B[right]
+            right+=1
+            i+=1
+        if left == length_A or right == length_B:
+            for j in range(left, length_A):
+                result[i] = A[j]
+                i+=1
+            for j in range(right, length_B):
+                result[i] = B[j]
+                i+=1
+            break
+        
+    return result

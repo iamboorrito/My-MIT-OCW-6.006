@@ -67,8 +67,9 @@ class Node():
 
 # A binary search tree which keeps track of children and its parent.
 class BST():
-    def __init__(self, key):
-        self.root = Node(key)
+    def __init__(self, keys):
+        self.root = Node(keys.pop(0))
+        self.extend(keys)
     
     # Create a new node with given key and put into BST.        
     def add(self, key):
@@ -149,13 +150,25 @@ class BST():
                 else: 
                     parent.left = node.right or node.left
                     (node.right or node.left ).parent = parent
-                    
+
     # Adds the elements of the list to the BST
     def extend(self, list):
         
         for x in list:
             self.add(x)
 
-bst = BST(5)
-bst.extend([2, 18, -4, 3, 21, 19, 25])
-bst.delete(18)
+    # Computes the number of keys less than or equal to given key
+    # starting from the subtree rooted at node.
+    def lte_count(self, key, node):
+        
+        if node is None:
+            return 0
+        
+        elif node.key <= key:
+            return 1+self.lte_count(key, node.left) + self.lte_count(key, node.right)
+        else:
+            return 0
+
+bst = BST([49, 46, 79, 41, 55, 66])
+print(bst.lte_count(79, bst.root))
+

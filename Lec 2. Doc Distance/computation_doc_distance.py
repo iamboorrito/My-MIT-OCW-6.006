@@ -56,13 +56,13 @@ def doc_dist(d1, d2):
     
     # Split and populate dicts
     for str in d1.split():
-        if dict1.__contains__(str):
+        if str in dict1:
             dict1[str] += 1
         else:
             dict1.update({str:1})
             
     for str in d2.split():
-        if dict2.__contains__(str):
+        if str in dict2:
             dict2[str] += 1
         else:
             dict2.update({str:1})
@@ -71,7 +71,7 @@ def doc_dist(d1, d2):
     prod_sum = 0.0
     
     for w in dict1:
-        if dict2.__contains__(w):
+        if w in dict2:
             prod_sum += dict1[w]*dict2[w]
     
     # Return their angle, 0 => no difference and pi/2 => nothing shared

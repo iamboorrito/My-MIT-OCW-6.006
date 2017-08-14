@@ -169,6 +169,21 @@ class BST():
         else:
             return 0
 
+    # BST Sort
+    def sort(self):
+        return self.sort_recur(self.root)
+    
+    # Recursively find [left nodes] + [node.key] + [right nodes] which will
+    # guarantee sortedness because of BST invariant.
+    def sort_recur(self, node):
+        
+        if node is None:
+            return []
+
+        return self.sort_recur(node.left) +[node.key] + self.sort_recur(node.right)
+        
+
 bst = BST([49, 46, 79, 41, 55, 66])
-print(bst.lte_count(79, bst.root))
+a = bst.sort()
+print(a)
 

@@ -98,11 +98,37 @@ output = []
 
 for i in range(k):
     output.extend(L[i])
-    
-"""
 
-def key(x):
-    return int(x)
+################################################
+#               Counting Sort                  #
+################################################
+
+Want to sort
+    3 5 7 5 5 3 6
+    
+We will place our integers into k buckets, since
+we know 0 <= key(x) <= k-1. Then we can just iterate
+through the buckets at the end.
+
+How L is populated:
+------------------------------
+j=0  |  3   |        |   |   |
+j=1  |  3   |  5     |   |   |
+j=2  |  3   |  5     |   | 7 |
+j=3  |  3   |  5 5   |   | 7 |
+j=4  |  3   |  5 5 5 |   | 7 |
+j=5  |  3 3 |  5 5 5 |   | 7 |
+j=6  |  3 3 |  5 5 5 | 6 | 7 |  
+------------------------------
+
+Then output is just the last row in order:
+    [3, 3, 5, 5, 5, 6, 7]
+    
+
+"""
+from operator import __getitem__
+
+
 
 # Counting sort: Works as a lookup table where we append
 # elements to a table by their keys then merge the table
@@ -113,7 +139,8 @@ def counting_sort(A, key, k):
 
     # For each item, key(x) is in {0, ..., k-1}
     for j in range( len(A) ):
-        L[ key(A[j]) ].append(A[j])
+        index = key(A[j])
+        L[ index ].append(A[j])
         
     output = []
     
@@ -122,9 +149,16 @@ def counting_sort(A, key, k):
         
     return output
 
+"""
+def key(x):
+    return int(x)
+
+
 A = [3, 5, 7, 5, 5, 3, 6]
-output = counting_sort(A, key, 8)   
-print(output)
+output = counting_sort(A, key, 8)
+print('Counting sort:\nunsorted: ' + str(A))
+print('sorted:   ' + str(output))
+"""
 
 ################################################
 #                 Radix Sort                   #
@@ -138,6 +172,26 @@ print(output)
     - Sort by least sig. -> most sig.
     - Sort by digit using counting sort.
 
-If k <= n^c, then radix sort is O(n*c)
+If b = k <= n^c, then radix sort is O(n*c)
 
+
+Sorts strings of integers.
+Args: List A
+      digits_range, base ten = 10
+      num_digits = string length of nums (must >= equal)
 """
+def radix_sort(A, digits_range, num_digits):
+    
+    output = A
+    
+    # Sort from least sig. digit to most sig. digit
+    for i in reversed(range(num_digits)):
+        output = counting_sort(output, lambda x: int(x[i]), digits_range)
+    
+    return output
+    
+    
+B = ['4002341', '2301432', '5552413', '0041243', '0712143', '7481234']
+print('Radix Sort:\nunsorted: ' + str(B))
+output = radix_sort(B, 9, 7)
+print('sorted:   ' + str(output))

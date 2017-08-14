@@ -183,7 +183,7 @@ class BST():
         return self.sort_recur(node.left) +[node.key] + self.sort_recur(node.right)
         
 
-bst = BST([49, 46, 79, 41, 55, 66])
+bst = BST([49, 1000, 46, 79, 41, 55, 66, 643, 12, 111, 12, 1234])
 a = bst.sort()
 print(a)
 

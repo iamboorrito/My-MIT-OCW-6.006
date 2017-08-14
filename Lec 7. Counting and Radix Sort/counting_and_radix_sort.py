@@ -1,7 +1,7 @@
 """
 Created on Aug 13, 2017
 
-@author: Evan
+@author: Evan Burton
 
 ################################################
 #             Comparison Model                 #

@@ -126,9 +126,6 @@ Then output is just the last row in order:
     
 
 """
-from operator import __getitem__
-
-
 
 # Counting sort: Works as a lookup table where we append
 # elements to a table by their keys then merge the table
